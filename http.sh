@@ -44,9 +44,3 @@ elif [ "$WEB_SERVER" = "httpd" ]; then
   systemctl restart httpd
 fi
 
-# Verify the setup
-if curl -s http://localhost | grep -q "$EXPECTED_CONTENT"; then
-  echo "HTTP server setup successfully! The Scoring Engine should be able to retrieve the expected content."
-else
-  echo "HTTP server setup failed. Please check the configuration."
-fi
