@@ -49,9 +49,3 @@ fi
 echo "Restarting vsftpd service..."
 systemctl restart vsftpd
 
-# Verify the setup
-if curl -s ftp://localhost/iloveftp.txt | grep -q "$FTP_CONTENT"; then
-  echo "FTP setup successfully! Anonymous access to iloveftp.txt is working."
-else
-  echo "FTP setup failed. Please check the configuration."
-fi
