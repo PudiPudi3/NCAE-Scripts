@@ -23,6 +23,9 @@ iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 iptables -A OUTPUT -p udp --dport 53 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 53 -j ACCEPT
 
+# Allow inbound traffic on passive mode data ports (50000-51000)
+iptables -A INPUT -p tcp --dport 50000:51000 -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 50000:51000 -j ACCEPT
 
 # Allow outgoing SSH for remote administration
 iptables -A OUTPUT -p tcp --dport 22 -j ACCEPT
