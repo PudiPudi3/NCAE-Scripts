@@ -52,11 +52,3 @@ chown root:bind $ZONE_FILE
 # Restart BIND9 service
 echo "Restarting BIND9 service..."
 systemctl restart bind9
-
-# Verify the setup
-echo "Verifying DNS setup..."
-if dig @$DNS_IP $DNS_DOMAIN +short | grep -q "$DNS_IP"; then
-  echo "DNS setup successfully! The Scoring Engine should be able to query $DNS_DOMAIN and get $DNS_IP."
-else
-  echo "DNS setup failed. Please check the configuration."
-fi
