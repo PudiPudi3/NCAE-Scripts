@@ -13,6 +13,7 @@ iptables -A INPUT -p udp --dport 53 -j ACCEPT
 iptables -A INPUT -p tcp --dport 53 -j ACCEPT
 iptables -A INPUT -p tcp --dport 21 -m conntrack --ctstate NEW -j ACCEPT
 iptables -A INPUT -p tcp --dport 3306 -m conntrack --ctstate NEW -j ACCEPT
+iptables -A INPUT -p tcp --dport 80 -m conntrack --ctstate NEW -j ACCEPT
 
 # Allow established and related connections for incoming traffic
 iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
@@ -25,6 +26,10 @@ iptables -A OUTPUT -p tcp --dport 53 -j ACCEPT
 
 # Allow outgoing SSH for remote administration
 iptables -A OUTPUT -p tcp --dport 22 -j ACCEPT
+
+# Allow FTP passive mode data ports (usually ports 1024–65535)
+iptables -A INPUT -p tcp --sport 1024:65535 --dport 1024:65535 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+iptables -A INPUT -p tcp --sport 20 --dport 1024:65535 -m conntrack --ctstate ESTABLISHED -j ACCEPT
 
 # Allow outgoing connections to a specific database server (optional)
 # Example: Replace 192.168.1.100 with the database server IP
