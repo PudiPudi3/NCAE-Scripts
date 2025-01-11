@@ -30,6 +30,8 @@ listen=YES
 listen_ipv6=NO
 anon_root=/srv/ftp
 no_anon_password=YES
+pasv_min_port=50000
+pasv_max_port=51000
 EOF
 
 # Ensure FTP root directory exists
