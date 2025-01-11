@@ -41,9 +41,3 @@ chmod 700 "$USER_SSH_DIR"
 chmod 600 "$USER_SSH_DIR/authorized_keys"
 chown -R "$SSH_USER:$SSH_USER" "$USER_SSH_DIR"
 
-# Verify the setup
-if ssh-keygen -F localhost | grep -q localhost; then
-  echo "SSH setup successfully! The Scoring Engine should be able to authenticate using the provided key."
-else
-  echo "SSH setup failed. Please check the configuration."
-fi
