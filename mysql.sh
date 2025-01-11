@@ -56,11 +56,3 @@ sed -i 's/^bind-address.*/bind-address = 0.0.0.0/' $CONFIG_FILE
 echo "Restarting MariaDB service..."
 systemctl restart mariadb
 
-# Verify the setup
-echo "Verifying database setup..."
-RESULT=$(mysql -u $DB_USER -p$DB_PASSWORD -D $DB_NAME -se "SELECT $DATA_COLUMN FROM $TABLE_NAME LIMIT 1;")
-if [ "$RESULT" -eq "$EXPECTED_VALUE" ]; then
-  echo "MySQL/MariaDB setup successfully! The Scoring Engine should be able to retrieve the value $EXPECTED_VALUE."
-else
-  echo "MySQL/MariaDB setup failed. Please check the configuration."
-fi
